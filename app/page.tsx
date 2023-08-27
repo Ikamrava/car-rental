@@ -1,10 +1,21 @@
 
+
+import CarCard from '@/component/CarCard'
 import CustomFilter from '@/component/CustomFilter'
 import Hero from '@/component/Hero'
 import SearchBar from '@/component/SearchBar'
+import { getCars } from '@/utils'
+import { all } from 'axios'
+import { useEffect } from 'react'
 
 
-export default function Home() {
+export default async function Home() {
+
+const allCars = await getCars();
+const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+
+
+
   return (
     <main className=" overflow-hidden">
           <Hero/>
@@ -25,6 +36,23 @@ export default function Home() {
             </div>
 
             </div>
+
+            {!isDataEmpty  ? 
+            (<section>
+              <div className=' home__cars-wrapper'>
+                  {allCars?.map((car) => (
+                      <CarCard carInfo = {car} key={car.id} />
+                    ))}
+              </div>
+            </section>)
+            : 
+            <div className='home__error-container'>
+              <h2 className=' text-black text-xl font-bold'>No resaults</h2>
+              <p>{allCars?.message}</p>
+            </div>
+            }
+
+
 
             
           </div>
