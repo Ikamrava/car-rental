@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { CarProps } from '@/Types'
 import CustomButton from './CustomButton'
 import { calculateCarRent } from '@/utils'
+import Cardetails from './Cardetails'
 
 interface CarCardProps {
     carInfo: CarProps;
@@ -62,6 +63,7 @@ const [isOpen,setIsopen] = useState(false)
         containerStyles='w-full py-[16px] rounded-full bg-primary-blue text-white text-[14px] mt-5 font-bold leading-[17px]' 
         rightIcon = "./right-arrow.svg"
         handleClick={()=>setIsopen(true)} />
+        <Cardetails isOpen={isOpen} closeModal = {()=>setIsopen(false)} carInfo={carInfo} />
     </div>
   )
 }
