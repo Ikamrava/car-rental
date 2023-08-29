@@ -47,12 +47,12 @@ export const deleteSearchParams = (type: string) => {
 
 
 export async function getCars(filters:FilterProps) {
-  const {manufacturer, model, year, fuel,limit } = filters
+  const {manufacturer, model, year, fuel_type,limit } = filters
     const headers = {
         'X-RapidAPI-Key': '62974d55e3msh839aaa1b46675aap115ce8jsnf414e2e67e8f',
     'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
     }
-    const response = await fetch(`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&fuel=${fuel}&limit=${limit}`, {
+    const response = await fetch(`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&fuel_type=${fuel_type}&limit=${limit}`, {
         method: 'GET',
         headers: headers,
         });
@@ -77,3 +77,12 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
 
   return `${url}`;
 } 
+
+
+export const updateSearchPrams = (title:string,value:string) =>{
+
+  const SearchPrams = new URLSearchParams(window.location.search);
+  SearchPrams.set(title,value);
+  const newPathName = `${window.location.pathname}?${SearchPrams.toString()}`;
+  return newPathName;
+}
