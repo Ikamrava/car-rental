@@ -36,4 +36,16 @@ export interface CarDetailsProp{
   carInfo: CarProps
 }
 
+export interface FilterProps{
+  manufacturer:string,
+  model:string,
+  fuel:string,
+  year:number
+  limit:number,
+}
+
+
+export interface HomeProps {
+  searchParams: FilterProps;
+}
 

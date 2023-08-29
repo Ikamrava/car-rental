@@ -1,17 +1,24 @@
 
 
+import { HomeProps } from '@/Types'
 import CarCard from '@/component/CarCard'
 import CustomFilter from '@/component/CustomFilter'
 import Hero from '@/component/Hero'
 import SearchBar from '@/component/SearchBar'
 import { getCars } from '@/utils'
 import { all } from 'axios'
+import { get } from 'http'
 import { useEffect } from 'react'
 
 
-export default async function Home() {
-
-const allCars = await getCars();
+export default async function Home({ searchParams }: HomeProps) {
+  const allCars = await getCars({
+    manufacturer: searchParams.manufacturer || "",
+    year: searchParams.year || 2023,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 12,
+    model: searchParams.model || "",
+  });
 const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
 
